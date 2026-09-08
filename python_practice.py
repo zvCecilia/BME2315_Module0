@@ -13,34 +13,39 @@
 XXX Write your pseudocode here XXX
 """
 def sum_fibonacci(N):
-    a, b = 0, 1
+    sum = 0
     total = 0
-    count = 0
-    while count < N:
-        total += a
-        a, b = b, a + b
-        count += 1
+    num = 0           """Used Ai help here to determine what I should set my variables equal to so that my loop would run correctly. For num and next""""
+    next = 1
+    for i in range (N): 
+        sum += num
+        num += sum
+        total = num
+        num = next
+        next = sum + next
     return total
+
+print(sum_fibonacci(5))
 
     
 # %% ###########################################################
 # Problem 2: Comment your code
 # Comments are very helpful for others (especially when pair-coding!) and yourself to understand your code! Add comments to the following code, which will run but produces the wrong output. Once you comment the code, you should be able to identify the error and fix it (the correct total that should be printed is 12).
-N = 6
+N = 6 # The number of Fibonacci numbers to sum
 
-a = 0 # set a to the first fibonacci number
-b = 1 # set b to the second fibonacci number
+a = 0 # A is set to the current fibonacci number
+b = 1 # b is set to the next fibonacci number
 count = 0
-total = 0
+total = 0 # Total is the sum of the fibonacci numbers up to the Nth fibonacci number
 
-while count < N:
-    total = total + b
+while count < N:    # Loop of all fibonacci numbers up to the Nth fibonacci number
+    total = total + a  # Add the current fibonacci number to the total
 
-    next_value = a + b
-    a = b
-    b = next_value
+    next_value = a + b # Calculate the next fibonacci number
+    a = b #a is now the current fibonacci number.
+    b = next_value # b is now the next fibonacci number
 
-    count = count + 1
+    count = count + 1 #Adding the total count of fibonacci numbers to the count variable.
 
 print(total)
 
@@ -48,10 +53,36 @@ print(total)
 # Problem 3: Using common Python libraries
 # What is the standard deviation of the first 10 numbers in the fibonacci sequence? Use the numpy library to calculate the standard deviation.
 
+import numpy as np
+fibonacci_sequence10 = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34] # First 10 Numbers
+std_dev = np.std(fibonacci_sequence) # Calculate the standard deviation using numpy
+
+
+
+
+
 # %% ###########################################################
 # Problem 4: Don't repeat yourself by writing functions
 # Write a function that takes an integer N as input and returns the sum of the first N numbers in the fibonacci sequence.
 # Then use this function to calculate the sums for N = 5, 10, 15, 20, 25, and 30 and print them as a list.
+def sum_fibonacci(N):
+    sum = 0
+    total = 0
+    num = 0
+    next = 1
+    for i in range(N): 
+        sum += num
+        num += sum
+        total = num
+        num = next
+        next = sum + next
+    return total
+
+N = [5, 10, 15, 20, 25, 30]
+new = []
+for i in N:
+    new.append(sum_fibonacci(i))
+print(new)
 
 # %% ###########################################################
 # Problem 5: Read your error messages
@@ -64,22 +95,17 @@ print(total)
 
 
 def find_fib_above_limit(limit):
-    """# The function inputs an integer called "limit" and finds the first number that goes above "limit" in the fibonacci sequence. It returns the index of that number.
-    :param limit: limit of fibonacci sequence
-    :type limit: integer
-    :return: index of the first number above limit
-    :rtype: integer
-    """
-    a = "0"
-    b = "1"
-
+    a = 0
+    b = 1
+    index = 0 # The index starting point has not been added + python did not know where to begin counting, Name error
     while a <= limit:
         next_value = a + b
         a = b
         b = next_value
         index += 1
-
     return index
+
+print(find_fib_above_limit(7))
 
 
 result = find_fib_above_limit(50)
@@ -89,16 +115,16 @@ print("The index of the first number above your limit is: ", result)
 # The following function will run but will output the wrong answer sometimes. Add test cases to verify that the function works correctly for a variety of inputs. If you find any inputs that produce incorrect outputs, fix the function. The function, when working properly, should return the sum of all odd Fibonacci numbers less than or equal to the input "limit".
 
 
-def sum_even_fib(limit):
+def sum_odd_fib(limit):
     a, b = 0, 1
     total = 0
     while b <= limit:
-        if b % 2 == 0:  # This line checks if the Fibonacci number is even
+        if b % 2 != 0:  # This line checks if the Fibonacci number is odd
             total = b
         a, b = b, a + b
     return total
 
 
-# Add your test cases here
+limit = 7 would return 2, this is because the function originally calulcated the sum of even Fibonacci numbers instead of odd Fibonacci numbers.
 
 # %%
